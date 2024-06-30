@@ -145,7 +145,7 @@ local function createAppInterface()
 
     local minimizedImage = Instance.new("ImageButton", minimizedFrame)
     minimizedImage.Size = UDim2.new(1, 0, 1, 0)
-    minimizedImage.Image = "http://www.roblox.com/asset/?id=10215283" -- A imagem que você forneceu
+    minimizedImage.Image = "https://telegra.ph/file/8157fc22ad0d927321df7.jpg" -- A imagem que você forneceu
     minimizedImage.BackgroundTransparency = 1
 
     local function minimize()
