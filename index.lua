@@ -29,8 +29,8 @@ local function createAppInterface()
 
     local mainFrame = Instance.new("Frame", screenGui)
     mainFrame.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
-    mainFrame.Size = UDim2.new(0, 400, 0, 250)
-    mainFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
+    mainFrame.Size = UDim2.new(0, 400, 0, 300)
+    mainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
     mainFrame.BorderSizePixel = 0
     mainFrame.Active = true
     mainFrame.Draggable = true
@@ -76,31 +76,53 @@ local function createAppInterface()
     teleButton.TextSize = 16
     teleButton.AutoButtonColor = false
     teleButton.BackgroundColor3 = Color3.fromRGB(33, 150, 243)
-    teleButton.Position = UDim2.new(0.5, -100, 0.2, 0)
+    teleButton.Position = UDim2.new(0.5, -100, 0.15, 0)
     teleButton.Size = UDim2.new(0, 200, 0, 40)
     teleButton.Name = "TeleportButton"
 
-    local autoFarmBossButton = Instance.new("TextButton", mainFrame)
-    autoFarmBossButton.Text = "Auto Farm Boss"
-    autoFarmBossButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    autoFarmBossButton.Font = Enum.Font.Gotham
-    autoFarmBossButton.TextSize = 16
-    autoFarmBossButton.AutoButtonColor = false
-    autoFarmBossButton.BackgroundColor3 = Color3.fromRGB(33, 150, 243)
-    autoFarmBossButton.Position = UDim2.new(0.5, -100, 0.35, 0)
-    autoFarmBossButton.Size = UDim2.new(0, 200, 0, 40)
-    autoFarmBossButton.Name = "AutoFarmBossButton"
+    local bossDropdown = Instance.new("TextButton", mainFrame)
+    bossDropdown.Text = "Escolher Boss"
+    bossDropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
+    bossDropdown.Font = Enum.Font.Gotham
+    bossDropdown.TextSize = 16
+    bossDropdown.AutoButtonColor = false
+    bossDropdown.BackgroundColor3 = Color3.fromRGB(33, 150, 243)
+    bossDropdown.Position = UDim2.new(0.5, -100, 0.3, 0)
+    bossDropdown.Size = UDim2.new(0, 200, 0, 40)
+    bossDropdown.Name = "BossDropdown"
 
-    local autoFarmStatusButton = Instance.new("TextButton", mainFrame)
-    autoFarmStatusButton.Text = "Auto Farm por Status"
-    autoFarmStatusButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    autoFarmStatusButton.Font = Enum.Font.Gotham
-    autoFarmStatusButton.TextSize = 16
-    autoFarmStatusButton.AutoButtonColor = false
-    autoFarmStatusButton.BackgroundColor3 = Color3.fromRGB(33, 150, 243)
-    autoFarmStatusButton.Position = UDim2.new(0.5, -100, 0.5, 0)
-    autoFarmStatusButton.Size = UDim2.new(0, 200, 0, 40)
-    autoFarmStatusButton.Name = "AutoFarmStatusButton"
+    local meleeButton = Instance.new("TextButton", mainFrame)
+    meleeButton.Text = "Auto Melee"
+    meleeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    meleeButton.Font = Enum.Font.Gotham
+    meleeButton.TextSize = 16
+    meleeButton.AutoButtonColor = false
+    meleeButton.BackgroundColor3 = Color3.fromRGB(33, 150, 243)
+    meleeButton.Position = UDim2.new(0.5, -100, 0.45, 0)
+    meleeButton.Size = UDim2.new(0, 200, 0, 40)
+    meleeButton.Name = "MeleeButton"
+
+    local gunButton = Instance.new("TextButton", mainFrame)
+    gunButton.Text = "Auto Gun"
+    gunButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    gunButton.Font = Enum.Font.Gotham
+    gunButton.TextSize = 16
+    gunButton.AutoButtonColor = false
+    gunButton.BackgroundColor3 = Color3.fromRGB(33, 150, 243)
+    gunButton.Position = UDim2.new(0.5, -100, 0.6, 0)
+    gunButton.Size = UDim2.new(0, 200, 0, 40)
+    gunButton.Name = "GunButton"
+
+    local fruitButton = Instance.new("TextButton", mainFrame)
+    fruitButton.Text = "Auto Blox Fruit"
+    fruitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    fruitButton.Font = Enum.Font.Gotham
+    fruitButton.TextSize = 16
+    fruitButton.AutoButtonColor = false
+    fruitButton.BackgroundColor3 = Color3.fromRGB(33, 150, 243)
+    fruitButton.Position = UDim2.new(0.5, -100, 0.75, 0)
+    fruitButton.Size = UDim2.new(0, 200, 0, 40)
+    fruitButton.Name = "FruitButton"
 
     local switch = Instance.new("TextButton", mainFrame)
     switch.Text = "Ativar Notificador"
@@ -109,7 +131,7 @@ local function createAppInterface()
     switch.TextSize = 16
     switch.AutoButtonColor = false
     switch.BackgroundColor3 = Color3.fromRGB(33, 150, 243)
-    switch.Position = UDim2.new(0.5, -100, 0.8, 0)
+    switch.Position = UDim2.new(0.5, -100, 0.9, 0)
     switch.Size = UDim2.new(0, 200, 0, 40)
     switch.Name = "NotifierSwitch"
 
@@ -150,8 +172,10 @@ local function createAppInterface()
 
     return {
         teleport = teleButton,
-        autoFarmBoss = autoFarmBossButton,
-        autoFarmStatus = autoFarmStatusButton,
+        bossDropdown = bossDropdown,
+        melee = meleeButton,
+        gun = gunButton,
+        bloxFruit = fruitButton,
         notifier = switch
     }
 end
@@ -256,36 +280,37 @@ local function espItems()
     end
 end
 
--- Função para pegar frutas dropadas automaticamente
-local function autoPickupFruits()
-    local fruitFolder = workspace:WaitForChild("Fruits")
-
-    while workspace_connection do
-        for _, fruit in ipairs(fruitFolder:GetChildren()) do
-            if fruit:IsA("Model") then
-                local fruitPosition = fruit.PrimaryPart.Position
-                teleportPlayer(fruitPosition)
-                wait(0.5)  -- Ajuste conforme necessário para evitar problemas de detecção
-                game.ReplicatedStorage.Remotes.PickupFruit:FireServer(fruit)  -- Exemplo de chamada para coletar a fruta
-            end
-        end
-        task.wait(1)
-    end
+-- Função para escolher um boss
+local function chooseBoss(bossName)
+    showText("Boss escolhido: " .. bossName, 2)
+    -- Implemente a lógica para lidar com o boss escolhido aqui
 end
 
--- Função para auto farm de boss
+-- Função para iniciar o auto farm de boss
 local function autoFarmBoss()
     -- Implemente a lógica para auto farm de boss aqui
     showText("Auto farm de Boss ativado", 2)
 end
 
--- Função para auto farm baseado no status escolhido pelo usuário
-local function autoFarmByStatus(status)
-    -- Implemente a lógica para auto farm baseado no status aqui
-    showText("Auto farm para status " .. status .. " ativado", 2)
+-- Função para iniciar o auto farm com base no tipo de arma melee
+local function autoMelee()
+    -- Implemente a lógica para auto farm com melee aqui
+    showText("Auto melee ativado", 2)
 end
 
--- Criação dos elementos visuais
+-- Função para iniciar o auto farm com base no tipo de arma gun
+local function autoGun()
+    -- Implemente a lógica para auto farm com gun aqui
+    showText("Auto gun ativado", 2)
+end
+
+-- Função para iniciar o auto farm com base no uso de blox fruit
+local function autoBloxFruit()
+    -- Implemente a lógica para auto farm com blox fruit aqui
+    showText("Auto blox fruit ativado", 2)
+end
+
+-- Criação dos elementos visuais e funcionalidades
 local components = createAppInterface()
 
 -- Conectar funcionalidades aos botões
@@ -293,12 +318,14 @@ components.notifier.MouseButton1Click:Connect(toggleNotifier)
 components.teleport.MouseButton1Click:Connect(function()
     teleportPlayer(Vector3.new(0, 100, 0))  -- Posição de exemplo, ajuste conforme necessário
 end)
-components.autoFarmBoss.MouseButton1Click:Connect(autoFarmBoss)
-components.autoFarmStatus.MouseButton1Click:Connect(function()
-    -- Lógica para permitir que o usuário escolha o status desejado
-    -- Exemplo: autoFarmByStatus("Health")
-    autoFarmByStatus("Health")  -- Exemplo simples, ajuste conforme necessário
+components.bossDropdown.MouseButton1Click:Connect(function()
+    -- Lógica para permitir que o usuário escolha o boss desejado
+    local selectedBoss = "Boss A"  -- Exemplo, substitua com a lógica real de escolha
+    chooseBoss(selectedBoss)
 end)
+components.melee.MouseButton1Click:Connect(autoMelee)
+components.gun.MouseButton1Click:Connect(autoGun)
+components.bloxFruit.MouseButton1Click:Connect(autoBloxFruit)
 components.esp.MouseButton1Click:Connect(function()
     espItems()
     showText("ESP ativado", 2)
