@@ -28,15 +28,15 @@ local function createAppInterface()
     screenGui.Name = "NotifierApp"
 
     local mainFrame = Instance.new("Frame", screenGui)
-    mainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-    mainFrame.Size = UDim2.new(0, 300, 0, 400)
-    mainFrame.Position = UDim2.new(0.5, -150, 0.5, -200)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    mainFrame.Size = UDim2.new(0, 300, 0, 200)
+    mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
     mainFrame.Active = true
     mainFrame.Draggable = true
 
     local header = Instance.new("Frame", mainFrame)
-    header.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-    header.Size = UDim2.new(1, 0, 0, 40)
+    header.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+    header.Size = UDim2.new(1, 0, 0, 30)
     header.Position = UDim2.new(0, 0, 0, 0)
     header.Active = true
     header.Draggable = true
@@ -56,8 +56,8 @@ local function createAppInterface()
     closeButton.Font = Enum.Font.GothamBold
     closeButton.TextSize = 18
     closeButton.BackgroundTransparency = 1
-    closeButton.Size = UDim2.new(0, 40, 1, 0)
-    closeButton.Position = UDim2.new(1, -40, 0, 0)
+    closeButton.Size = UDim2.new(0, 30, 1, 0)
+    closeButton.Position = UDim2.new(1, -30, 0, 0)
 
     local minimizeButton = Instance.new("TextButton", header)
     minimizeButton.Text = "-"
@@ -65,17 +65,17 @@ local function createAppInterface()
     minimizeButton.Font = Enum.Font.GothamBold
     minimizeButton.TextSize = 18
     minimizeButton.BackgroundTransparency = 1
-    minimizeButton.Size = UDim2.new(0, 40, 1, 0)
-    minimizeButton.Position = UDim2.new(1, -80, 0, 0)
+    minimizeButton.Size = UDim2.new(0, 30, 1, 0)
+    minimizeButton.Position = UDim2.new(1, -60, 0, 0)
 
     local switch = Instance.new("TextButton", mainFrame)
     switch.Text = "Ativar Notificador"
     switch.TextColor3 = Color3.fromRGB(255, 255, 255)
     switch.Font = Enum.Font.Gotham
-    switch.TextSize = 14
+    switch.TextSize = 16
     switch.AutoButtonColor = false
     switch.BackgroundColor3 = Color3.fromRGB(30, 136, 229)
-    switch.Position = UDim2.new(0.5, -100, 0.8, 0)
+    switch.Position = UDim2.new(0.5, -100, 0.6, 0)
     switch.Size = UDim2.new(0, 200, 0, 40)
     switch.Name = "NotifierSwitch"
 
@@ -84,10 +84,12 @@ local function createAppInterface()
     minimizedFrame.Size = UDim2.new(0, 100, 0, 100)
     minimizedFrame.Position = UDim2.new(0, 10, 1, -110)
     minimizedFrame.Visible = false
+    minimizedFrame.Active = true
+    minimizedFrame.Draggable = true
 
     local minimizedImage = Instance.new("ImageButton", minimizedFrame)
     minimizedImage.Size = UDim2.new(1, 0, 1, 0)
-    minimizedImage.Image = "rbxassetid://1292610632"  -- A imagem que você forneceu
+    minimizedImage.Image = "http://www.roblox.com/asset/?id=10215283" -- A imagem que você forneceu
     minimizedImage.BackgroundTransparency = 1
 
     local function minimize()
@@ -119,12 +121,15 @@ end
 local workspace_connection
 
 -- Função para ativar ou desativar o notificador
-local function toggleNotifier(enabled)
-    if enabled then
-        if workspace_connection then
-            return  -- Já ativado, não faça nada
-        end
-        
+local function toggleNotifier()
+    if workspace_connection then
+        workspace_connection:Disconnect()
+        workspace_connection = nil
+        switch.Text = "Ativar Notificador"
+        switch.BackgroundColor3 = Color3.fromRGB(30, 136, 229)
+        playSound("rbxassetid://4612375233", 1)
+        showText("Notificador desativado com sucesso", 2)
+    else
         workspace_connection = workspace.ChildAdded:Connect(function(child)
             if child.Name == "Fruit " then
                 task.spawn(enableNotifier, child)
@@ -136,16 +141,10 @@ local function toggleNotifier(enabled)
             task.spawn(enableNotifier, fruit)
         end
 
+        switch.Text = "Desativar Notificador"
+        switch.BackgroundColor3 = Color3.fromRGB(76, 175, 80)
         playSound("rbxassetid://3997124966", 4)
-        gui.Notifier.Visible = true
         showText("Notificador ativado com sucesso", 2)
-    else
-        if workspace_connection then
-            workspace_connection:Disconnect()
-            workspace_connection = nil
-            playSound("rbxassetid://4612375233", 1)
-            showText("Notificador desativado com sucesso", 2)
-        end
     end
 end
 
@@ -188,9 +187,7 @@ end
 local switch = createAppInterface()
 
 -- Função para ativar/desativar o notificador quando o switch é clicado
-switch.MouseButton1Click:Connect(function()
-    toggleNotifier(not workspace_connection)
-end)
+switch.MouseButton1Click:Connect(toggleNotifier)
 
 -- Texto de inicialização
 showText("Interface inicializada com sucesso", 3)
