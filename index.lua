@@ -1,5 +1,5 @@
 local local_player = game.Players.LocalPlayer
-local gui = local_player.PlayerGui.Main  -- Referência à interface principal do jogador
+local gui = local_player.PlayerGui:WaitForChild("Main")
 
 -- Função para exibir texto temporário
 local function showText(text, time)
@@ -22,34 +22,53 @@ local function playSound(asset_id, pb_speed)
     end)
 end
 
--- Função para criar um LED visual
-local function createLed()
-    local twitter_button = gui.Code
+-- Função para criar a interface do aplicativo
+local function createAppInterface()
+    local screenGui = Instance.new("ScreenGui", local_player.PlayerGui)
+    screenGui.Name = "NotifierApp"
 
-    if twitter_button:FindFirstChild("NotifierLed") then
-        twitter_button.NotifierLed:Destroy()
-    end
+    local mainFrame = Instance.new("Frame", screenGui)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    mainFrame.Size = UDim2.new(0, 300, 0, 400)
+    mainFrame.Position = UDim2.new(0.5, -150, 0.5, -200)
+    mainFrame.Active = true
+    mainFrame.Draggable = true
 
-    local led = Instance.new("ImageLabel")
-    led.BackgroundTransparency = 1
-    led.Image = "rbxassetid://7151733371"  -- Imagem de um LED verde
-    led.Position = UDim2.new(0.95, 0, 0.05, 0)
-    led.Size = UDim2.new(0, 30, 0, 30)
-    led.Name = "NotifierLed"
-    led.Parent = twitter_button
+    local header = Instance.new("Frame", mainFrame)
+    header.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    header.Size = UDim2.new(1, 0, 0, 40)
+    header.Position = UDim2.new(0, 0, 0, 0)
+    header.Active = true
+    header.Draggable = true
 
-    return led
-end
+    local titleLabel = Instance.new("TextLabel", header)
+    titleLabel.Text = "Notifier App"
+    titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    titleLabel.Font = Enum.Font.GothamBold
+    titleLabel.TextSize = 18
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Size = UDim2.new(1, -80, 1, 0)
+    titleLabel.Position = UDim2.new(0, 10, 0, 0)
 
--- Função para criar um switch para ativar/desativar o notificador
-local function createSwitch()
-    local settings_button = gui.Settings
+    local closeButton = Instance.new("TextButton", header)
+    closeButton.Text = "X"
+    closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    closeButton.Font = Enum.Font.GothamBold
+    closeButton.TextSize = 18
+    closeButton.BackgroundTransparency = 1
+    closeButton.Size = UDim2.new(0, 40, 1, 0)
+    closeButton.Position = UDim2.new(1, -40, 0, 0)
 
-    if settings_button:FindFirstChild("NotifierSwitch") then
-        settings_button.NotifierSwitch:Destroy()
-    end
+    local minimizeButton = Instance.new("TextButton", header)
+    minimizeButton.Text = "-"
+    minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    minimizeButton.Font = Enum.Font.GothamBold
+    minimizeButton.TextSize = 18
+    minimizeButton.BackgroundTransparency = 1
+    minimizeButton.Size = UDim2.new(0, 40, 1, 0)
+    minimizeButton.Position = UDim2.new(1, -80, 0, 0)
 
-    local switch = Instance.new("TextButton")
+    local switch = Instance.new("TextButton", mainFrame)
     switch.Text = "Ativar Notificador"
     switch.TextColor3 = Color3.fromRGB(255, 255, 255)
     switch.Font = Enum.Font.Gotham
@@ -59,7 +78,39 @@ local function createSwitch()
     switch.Position = UDim2.new(0.5, -100, 0.8, 0)
     switch.Size = UDim2.new(0, 200, 0, 40)
     switch.Name = "NotifierSwitch"
-    switch.Parent = settings_button
+
+    local minimizedFrame = Instance.new("Frame", screenGui)
+    minimizedFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    minimizedFrame.Size = UDim2.new(0, 100, 0, 100)
+    minimizedFrame.Position = UDim2.new(0, 10, 1, -110)
+    minimizedFrame.Visible = false
+
+    local minimizedImage = Instance.new("ImageButton", minimizedFrame)
+    minimizedImage.Size = UDim2.new(1, 0, 1, 0)
+    minimizedImage.Image = "rbxassetid://1292610632"  -- A imagem que você forneceu
+    minimizedImage.BackgroundTransparency = 1
+
+    local function minimize()
+        mainFrame.Visible = false
+        minimizedFrame.Visible = true
+    end
+
+    local function maximize()
+        mainFrame.Visible = true
+        minimizedFrame.Visible = false
+    end
+
+    closeButton.MouseButton1Click:Connect(function()
+        screenGui:Destroy()
+    end)
+
+    minimizeButton.MouseButton1Click:Connect(function()
+        minimize()
+    end)
+
+    minimizedImage.MouseButton1Click:Connect(function()
+        maximize()
+    end)
 
     return switch
 end
@@ -134,16 +185,12 @@ local function enableNotifier(fruit)
 end
 
 -- Criação dos elementos visuais
-local led = createLed()
-local switch = createSwitch()
+local switch = createAppInterface()
 
 -- Função para ativar/desativar o notificador quando o switch é clicado
 switch.MouseButton1Click:Connect(function()
-    toggleNotifier(not switch.Visible)  -- Inverte o estado atual
+    toggleNotifier(not workspace_connection)
 end)
 
 -- Texto de inicialização
 showText("Interface inicializada com sucesso", 3)
-
--- Inicializa o notificador desativado
-toggleNotifier(false)
