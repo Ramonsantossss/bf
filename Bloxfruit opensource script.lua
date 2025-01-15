@@ -1,4 +1,19 @@
--- Removido o sistema de key
+-- Sistema de key totalmente removido sem alterar executores
+
+local exploit = getexecutorname or identifyexecutor
+local support = {
+    ["Fluxus"] = true,
+    ["Trigon"] = false,
+    ["Codex"] = true,
+    ["Delta"] = true,
+    ["Vega X"] = true,
+    ["Hydrogen"] = true,
+    ["alysse"] = false,
+    ["ArceusX"] = true,
+    ["Electron"] = false,
+}
+
+print("Executor detectado: " .. (exploit() or "Desconhecido"))
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
