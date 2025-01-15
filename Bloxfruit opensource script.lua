@@ -1,69 +1,4 @@
-local exploit = getexecutorname or identifyexecutor
-local support = {
-    ["Fluxus"] = true,
-    ["Trigon"] = false,
-    ["Codex"] = true,
-    ["Delta"] = true,
-    ["Vega X"] = true,
-    ["Hydrogen"] = true,
-    ["alysse"] = false,
-    ["ArceusX"] = true,
-    ["Electron"] = false,
-}
-
-if support[exploit()]  then
-    print("Correct Executor Let's Run uwu")
-else
- game.Players.LocalPlayer:Kick("Ko Hỗ Trợ Executor | Not Support Executor | Tidak Mendukung Pelaksana | support fluxus,hydrogen,alysse,trigon,vegaX")
- end
-    
-local ExecutorUsing = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Fluxus" or
-"Fluxus"
-                    local HttpService = game:GetService("HttpService")
-                     local Data =
-                        {
-                            ["embeds"]= {
-                                {            
-                                    ["title"]= "𝙥𝙡𝙖𝙮𝙚𝙧𝙨 𝙥𝙧𝙤𝙛𝙞𝙡𝙚💻";
-                                    ["url"]= "https://www.roblox.com/users/"..game.Players.LocalPlayer.UserId;
-                                    ["description"]= "||```"..game.Players.LocalPlayer.DisplayName.." ("..game.Players.LocalPlayer.Name..")```||";
-                                    ["color"]= tonumber(0x7269da);
-                                     ["thumbnail"] = {["url"] = "https://cdn.discordapp.com/attachments/1171840145335537824/1201725336598106183/Screenshot_2024-01-28-16-39-42-226_com.facebook.katana-edit.jpg?ex=65cadcef&is=65b867ef&hm=850789c6f502230b1eaa6ffed401f83a8c7d3a5ffea10e13ef382b3806a80615&"};
-                                    
-                                    ["fields"]= {
-                                        {
-                                            ["name"]= "𝙀𝙭𝙚𝙘𝙪𝙩𝙤𝙧📑",
-                                            ["value"]= "```"..ExecutorUsing.."```",
-                                            ["inline"]= true
-                                        },
-                                        {
-                                            ["name"]= "𝘼𝙜𝙚🗓",
-                                            ["value"]= "```"..game.Players.LocalPlayer.AccountAge.." Day```",
-                                            ["inline"]= true
-                                        },
-                                        {
-                                            ["name"]= "𝙎𝙘𝙧𝙞𝙥𝙩 𝙎𝙩𝙖𝙩𝙪𝙨ℹ️",
-                                            ["value"]= "```Người dùng đã chạy script Nome Do Seu Hub Auto Farm Cảm Ơn Vì Đã Dùng RinX!!!!```",
-                                            ["inline"]= true
-                                            },
-                                       {
-                                     ["name"] = "𝙅𝙤𝙗 𝙄𝙙",
-                                     ["value"]= '```game:GetService("TeleportService"):TeleportToPlaceInstance('..game.PlaceId..', "'..game.JobId..'", game.Players.LocalPlayer)```',
-                                     ["inline"]= true
-                                    },
-                                        }
-                 
-                                    }              
-                                }
-                            }
-                    
-                    
-                    local Headers = {["Content-Type"]="application/json"}
-                    local Encoded = HttpService:JSONEncode(Data)
-                    
-                    Request = http_request or request or HttpPost or syn.request
-                    local Final = {Url = "https://discord.com/api/webhooks/1203612065302970389/GHxtX7Y_Pdy2lQbZPo91hEfvXRagarlM5OYjAFy7NiaVFKLbbZuRpDl-SX3w3y6Cv24W", Body = Encoded, Method = "POST", Headers = Headers}
-                    Request(Final)
+-- Removido o sistema de key
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
@@ -71,7 +6,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexware/Orion/main/source")))()
 
 local Window = Fluent:CreateWindow({
-    Title = " Nome Do Seu Hub | Blox Fruits",
+    Title = "Nome Do Seu Hub | Blox Fruits",
     SubTitle = "Version 2",
     TabWidth = 160,
     Size = UDim2.fromOffset(530, 350),
@@ -79,6 +14,7 @@ local Window = Fluent:CreateWindow({
     Theme = "Darker",
     MinimizeKey = Enum.KeyCode.End
 })
+
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "rbxassetid://88147973848189" }),
     Setting = Window:AddTab({ Title = "Setting", Icon = "rbxassetid://88147973848189" }),
@@ -89,99 +25,57 @@ local Tabs = {
     Raid = Window:AddTab({ Title = "Raid", Icon = "rbxassetid://88147973848189" }),
     Race = Window:AddTab({ Title = "Race V4", Icon = "rbxassetid://88147973848189" }),
     Shop = Window:AddTab({ Title = "Shop", Icon = "rbxassetid://88147973848189" }),
-	Misc = Window:AddTab({ Title = "Misc", Icon = "rbxassetid://88147973848189" }),
+    Misc = Window:AddTab({ Title = "Misc", Icon = "rbxassetid://88147973848189" }),
 }
-local Options = Fluent.Options
-do
-OrionLib:MakeNotification(
-        {
-            Name = "Notification",
-            Content = "Please Wait For Loading Code",
-            Image = "rbxassetid://88147973848189",
-            Time = 7
-        }
-    )
+
+OrionLib:MakeNotification({
+    Name = "Notification",
+    Content = "Please Wait For Loading Code",
+    Image = "rbxassetid://88147973848189",
+    Time = 7
+})
+
 _G.lakala = true
 
 setclipboard("Nome Do Seu Hub Is The Best")
 
---Place Id Check
 local id = game.PlaceId
-if id == 2753915549 then First_Sea = true; elseif id == 4442272183 then Second_Sea = true; elseif id == 7449423635 then Third_Sea = true; else game:Shutdown() end;
-------ajazksk
-local getgenv, getnamecallmethod, hookmetamethod, newcclosure, checkcaller, stringlower = getgenv, getnamecallmethod, hookmetamethod, newcclosure, checkcaller, string.lower
+if id == 2753915549 then First_Sea = true elseif id == 4442272183 then Second_Sea = true elseif id == 7449423635 then Third_Sea = true else game:Shutdown() end
 
---// Loaded check
-
-
-if getgenv().ED_AntiKick then
-	return
-end
-
---// Variables
+if getgenv().ED_AntiKick then return end
 
 local Players, StarterGui, OldNamecall = game:GetService("Players"), game:GetService("StarterGui")
 
---// Global Variables
-
 getgenv().ED_AntiKick = {
-	Enabled = true, -- Set to false if you want to disable the Anti-Kick.
-	SendNotifications = true, -- Set to true if you want to get notified for every event
-	CheckCaller = true -- Set to true if you want to disable kicking by other executed scripts
+    Enabled = true,
+    SendNotifications = true,
+    CheckCaller = true
 }
 
---// Main
-
 OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
-	if (getgenv().ED_AntiKick.CheckCaller and not checkcaller() or true) and stringlower(getnamecallmethod()) == "kick" and ED_AntiKick.Enabled then
-		if getgenv().ED_AntiKick.SendNotifications then
-			StarterGui:SetCore("SendNotification", {
-				Title = "Nome Do Seu Hub",
-				Text = "The script has successfully intercepted an attempted kick.",
-				Icon = "rbxassetid://88147973848189",
-				Duration = 2,
-			})
-		end
-
-		return nil
-	end
-
-	return OldNamecall(...)
+    if (getgenv().ED_AntiKick.CheckCaller and not checkcaller() or true) and string.lower(getnamecallmethod()) == "kick" and ED_AntiKick.Enabled then
+        if getgenv().ED_AntiKick.SendNotifications then
+            StarterGui:SetCore("SendNotification", {
+                Title = "Nome Do Seu Hub",
+                Text = "The script has successfully intercepted an attempted kick.",
+                Icon = "rbxassetid://88147973848189",
+                Duration = 2,
+            })
+        end
+        return nil
+    end
+    return OldNamecall(...)
 end))
 
 if getgenv().ED_AntiKick.SendNotifications then
-	StarterGui:SetCore("SendNotification", {
-		Title = "Nome Do Seu Hub",
-		Text = "Anti-Kick script loaded!",
-		Icon = "rbxassetid://88147973848189",
-		Duration = 3,
-	})
+    StarterGui:SetCore("SendNotification", {
+        Title = "Nome Do Seu Hub",
+        Text = "Anti-Kick script loaded!",
+        Icon = "rbxassetid://88147973848189",
+        Duration = 3,
+    })
 end
---Flag Player
-if _G.lakala == true then
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
-                v:Destroy()
-            end
-        end
-     end
-     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
-                v:Destroy()
-            end
-        end
-     end
-    end
-    
 
---Anti AFK
-game:GetService("Players").LocalPlayer.Idled:connect(function()
-	game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-	wait(1)
-	game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-end)
 ------// BLOX FRUIT
 --// Sea world
 First_Sea = false
