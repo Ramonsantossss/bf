@@ -76,7 +76,8 @@ local Window = Fluent:CreateWindow({
     TabWidth = 160,
     Size = UDim2.fromOffset(530, 350),
     Acrylic = true,
-    Theme = "Darker"
+    Theme = "Darker",
+    MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "rbxassetid://88147973848189" }),
@@ -88,7 +89,7 @@ local Tabs = {
     Raid = Window:AddTab({ Title = "Raid", Icon = "rbxassetid://88147973848189" }),
     Race = Window:AddTab({ Title = "Race V4", Icon = "rbxassetid://88147973848189" }),
     Shop = Window:AddTab({ Title = "Shop", Icon = "rbxassetid://88147973848189" }),
-    Misc = Window:AddTab({ Title = "Misc", Icon = "rbxassetid://88147973848189" }),
+	Misc = Window:AddTab({ Title = "Misc", Icon = "rbxassetid://88147973848189" }),
 }
 local Options = Fluent.Options
 do
